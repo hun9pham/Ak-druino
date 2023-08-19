@@ -10,7 +10,7 @@ static void uartCsPut(uint8_t ch) {
     HAL_UART_Transmit(&huart1, &ch, sizeof(uint8_t), 0xFFFF);
 }
 
-void uartCsInit() {
+void UartCsInit() {
     GPIO_InitTypeDef GPIO_InitStruct;
 
     __HAL_RCC_USART1_CLK_ENABLE();
@@ -22,7 +22,7 @@ void uartCsInit() {
     HAL_GPIO_Init(UART_DBG_PORT, &GPIO_InitStruct);
 
     huart1.Instance = USART1;
-    huart1.Init.BaudRate = 115200;
+    huart1.Init.BaudRate = 460800;
     huart1.Init.WordLength = UART_WORDLENGTH_8B;
     huart1.Init.StopBits = UART_STOPBITS_1;
     huart1.Init.Parity = UART_PARITY_NONE;

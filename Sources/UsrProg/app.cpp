@@ -1,7 +1,7 @@
 #include "FreeRTOS.h"
 #include "cmsis_os.h"
 
-#include "FAClass.h"
+#include "frtosa.h"
 #include "xprintf.h"
 #include "app.h"
 #include "app_dbg.h"
@@ -11,23 +11,20 @@
 #include "sys_io.h"
 #include "sys_cfgCtl.h"
 
-void appStartInit() {
-    ///////////////////////////////
-    // Software initial
-    ///////////////////////////////
+static void softInit() {
     periphsClkStart();
     watchdogInit();
-    uartCsInit();
+    UartCsInit();
     fatalInit();
     memMangCalc();
+}
 
-    ///////////////////////////////
-    // Hardware initial
-    ///////////////////////////////
+static void hardInit() {
     ledLifeInit();
+}
 
-    ///////////////////////////////
-    // User programming
-    ///////////////////////////////
+void appStartInit() {
+    softInit();
+    hardInit();
     DYNAMO_CYBORG.programInit((xTask_t*)taskList, EOT_TASK_ID);
 }

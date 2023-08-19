@@ -8,9 +8,10 @@ extern "C"
 
 #define USER_DEFINE_SIGNAL  (10)
 
-/////////////////////////////////////
-// TASK SYSTEM SIGNALS
-/////////////////////////////////////
+/*-------------------------------------------------------*
+/ TASK SYSTEM SIGNALS
+/
+/-------------------------------------------------------*/
 #define SYSTEM_ALIVE_NOFITY_INTERVAL        ( 1000 )
 
 enum {
@@ -18,17 +19,23 @@ enum {
 	SYSTEM_SOFT_REBOOT,
 };
 
-/////////////////////////////////////
-// TASK CONSOLE SIGNALS
-/////////////////////////////////////
+/*-------------------------------------------------------*
+/ TASK CONSOLE SIGNALS
+/
+/-------------------------------------------------------*/
+enum {
+	CONSOLE_CLI_INIT = USER_DEFINE_SIGNAL,
+	CONSOLE_HANDLE_CMD_LINE,
+};
 
-/////////////////////////////////////
-// TASK DEVICE MANAGER SIGNALS
-/////////////////////////////////////
-#define DEVMNG_SENSORS_UPDATE_INTERVAL      ( 1000 )
+/*-------------------------------------------------------*
+/ TASK DEVICE MANAGER SIGNALS
+/
+/-------------------------------------------------------*/
 
 enum {
 	DEVMNG_SENSORS_UPDATE = USER_DEFINE_SIGNAL,
+
 };
 
 /////////////////////////////////////

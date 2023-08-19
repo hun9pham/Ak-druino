@@ -5,5 +5,5 @@ CFLAGS += -ISources/UsrProg/FreeRTOSAssistant
 CPPFLAGS += -ISources/UsrProg/FreeRTOSAssistant
 
 ### Sources
-CPP_SOURCES += Sources/UsrProg/FreeRTOSAssistant/Event.cpp
-CPP_SOURCES += Sources/UsrProg/FreeRTOSAssistant/FAClass.cpp
+CPP_SOURCES += Sources/UsrProg/FreeRTOSAssistant/eventbox.cpp
+CPP_SOURCES += Sources/UsrProg/FreeRTOSAssistant/frtosa.cpp

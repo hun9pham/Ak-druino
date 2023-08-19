@@ -23,9 +23,9 @@ typedef struct t_fatalLog {
 
 extern void fatalInit();
 extern uint8_t fatalClear();
-extern void fatal(const char *s);
+extern void fatal(const char *s, uint8_t code);
 
-#define FATAL(s)		fatal(s)
+#define FATAL(s,c)		fatal(s,c)
 
 #ifdef __cplusplus
 }

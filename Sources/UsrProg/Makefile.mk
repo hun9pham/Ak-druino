@@ -13,3 +13,5 @@ CPP_SOURCES += Sources/UsrProg/task_list.cpp
 CPP_SOURCES += Sources/UsrProg/task_system.cpp
 CPP_SOURCES += Sources/UsrProg/task_console.cpp
 CPP_SOURCES += Sources/UsrProg/task_devManager.cpp
+
+CPP_SOURCES += Sources/UsrProg/CsHandle.cpp

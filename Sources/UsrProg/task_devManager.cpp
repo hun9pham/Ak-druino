@@ -1,6 +1,6 @@
 #include "app.h"
 #include "app_dbg.h"
-#include "FAClass.h"
+#include "frtosa.h"
 #include "task_list.h"
 #include "task_devManager.h"
 
@@ -9,32 +9,35 @@
 
 #define TAG "TaskDevManager"
 
+TaskHandle_t CreateDevManager;
+
 static void localStartInit();
-static void localHandle(xEvent_t *evtHandler);
+static void localHandle(xEvent *EOb);
 
 void taskDevManagerCb(void *params) {
-	DYNAMO_CYBORG.syncAllTasksStarted("TaskDevManager");
+	DYNAMO_CYBORG.syncAllTasksStarted();
 	APP_LOG(TAG, "Started");
 	localStartInit();
 
-	xEvent_t EventObject;
+	xEvent EOb;
 
 	for (;;) {
-        DYNAMO_CYBORG.getMsgFrom(TASK_DEVMANAGER_ID, &EventObject);
-		localHandle(&EventObject);
-		DYNAMO_CYBORG.freeMsg(&EventObject);
+		while (DYNAMO_CYBORG.getMsgFrom(TASK_DEVMANAGER_ID, &EOb)) {
+			localHandle(&EOb);
+		}
+		DYNAMO_CYBORG.watiForSignal(TASK_DEVMANAGER_ID);
 	}
 }
 
 void localStartInit() {
-    DYNAMO_CYBORG.setTimer(TASK_DEVMANAGER_ID, DEVMNG_SENSORS_UPDATE, DEVMNG_SENSORS_UPDATE_INTERVAL, true);
+    DYNAMO_CYBORG.postMsg(TASK_DEVMANAGER_ID, DEVMNG_SENSORS_UPDATE);
 }
 
-void localHandle(xEvent_t *evtHandler) {
-    switch (evtHandler->Signal) {
+void localHandle(xEvent *EOb) {
+    switch (EOb->Signal) {
 	case DEVMNG_SENSORS_UPDATE: {
 		APP_DBG_SIG(TAG, "DEVMNG_SENSORS_UPDATE");
-
+		
 	}
 	break;
 

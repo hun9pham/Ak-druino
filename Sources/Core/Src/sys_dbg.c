@@ -28,11 +28,11 @@ uint8_t fatalClear() {
     return 0;
 }
 
-void fatal(const char *s) {
+void fatal(const char *s, uint8_t code) {
 	__disable_irq();
 	watchdogRst();
 
-	SYS_PRINT("\r\nFATAL: %s\r\n", s);
+	SYS_PRINT("\r\nFATAL: %s, %X\r\n", s, code);
 
 // 	flashRead(FATAL_LOG_FLASH_ADDRESS, (uint8_t*)&fatalLog, sizeof(fatalLog));
 // 	strcpy(fatalLog.string, s);

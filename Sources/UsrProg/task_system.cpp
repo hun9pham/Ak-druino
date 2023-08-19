@@ -1,6 +1,6 @@
 #include "app.h"
 #include "app_dbg.h"
-#include "FAClass.h"
+#include "frtosa.h"
 #include "task_list.h"
 #include "task_system.h"
 
@@ -9,20 +9,23 @@
 
 #define TAG "TaskSystem"
 
+TaskHandle_t CreateSystem;
+
 static void localStartInit();
-static void localHandle(xEvent_t *evtHandler);
+static void localHandle(xEvent *EOb);
 
 void taskSystemCb(void *params) {
-	DYNAMO_CYBORG.syncAllTasksStarted("TaskSystem");
+	DYNAMO_CYBORG.syncAllTasksStarted();
 	APP_LOG(TAG, "Started");
 	localStartInit();
 
-	xEvent_t EventObject;
+	xEvent EOb;
 
 	for (;;) {
-        DYNAMO_CYBORG.getMsgFrom(TASK_SYSTEM_ID, &EventObject);
-		localHandle(&EventObject);
-		DYNAMO_CYBORG.freeMsg(&EventObject);
+		while (DYNAMO_CYBORG.getMsgFrom(TASK_SYSTEM_ID, &EOb)) {
+			localHandle(&EOb);
+		}
+		DYNAMO_CYBORG.watiForSignal(TASK_SYSTEM_ID);
 	}
 }
 
@@ -30,12 +33,13 @@ void localStartInit() {
     DYNAMO_CYBORG.setTimer(TASK_SYSTEM_ID, SYSTEM_PING_ALIVE, SYSTEM_ALIVE_NOFITY_INTERVAL, true);
 }
 
-void localHandle(xEvent_t *evtHandler) {
-    switch (evtHandler->Signal) {
+void localHandle(xEvent *EOb) {
+    switch (EOb->Signal) {
 	case SYSTEM_PING_ALIVE: {
 		APP_DBG_SIG(TAG, "SYSTEM_PING_ALIVE");
 		blinkLedLife();
 		watchdogRst();
+		
 	}
 	break;
 

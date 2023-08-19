@@ -17,7 +17,7 @@ extern "C"
 extern IWDG_HandleTypeDef hiwdg;
 extern UART_HandleTypeDef huart1;
 
-extern void uartCsInit();
+extern void UartCsInit();
 extern void watchdogInit();
 extern void memMangCalc();
 

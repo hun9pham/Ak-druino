@@ -5,9 +5,10 @@
 #include "task_devManager.h"
 
 xTask_t taskList[] = {
-    /////////////////////////
-    // TASK SYSTEM
-    ////////////////////////
+    /*------------------------/
+    / TASK SYSTEM
+    /
+    /-------------------------*/
 #if TASK_SYSTEM_EN
     {
         TASK_SYSTEM_ID,
@@ -15,12 +16,14 @@ xTask_t taskList[] = {
         STACK_SZ_MIN,
         DIAMOND,
         "TaskSystem",
-        NULL
+        CreateSystem,
+        EVENT_MSG_NULL
     },
 #endif
-    /////////////////////////
-    // TASK CONSOLE
-    ////////////////////////
+    /*------------------------/
+    / TASK CONSOLE
+    /
+    /-------------------------*/
 #if TASK_CONSOLE_EN
 	{	
         TASK_CONSOLE_ID,
@@ -28,12 +31,14 @@ xTask_t taskList[] = {
         STACK_SZ_MIN,
         GOLD,
         "TaskConsole",
-        NULL 
-    }
+        CreateConsole,
+        EVENT_MSG_NULL 
+    },
 #endif
-    /////////////////////////
-    // TASK DEVICE MANAGER
-    ////////////////////////
+    /*------------------------/
+    / TASK DEVICE MANAGER
+    /
+    /-------------------------*/
 #if TASK_DEVMANAGER_EN
 	{	
         TASK_DEVMANAGER_ID,
@@ -41,7 +46,8 @@ xTask_t taskList[] = {
         STACK_SZ_MIN,
         GOLD,
         "TaskDevManager",
-        NULL 
+        CreateDevManager,
+        EVENT_MSG_NULL
     }
 #endif
 };

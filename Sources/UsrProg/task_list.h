@@ -1,10 +1,10 @@
 #ifndef __TASK_LIST_H
 #define __TASK_LIST_H
 
-#include "FAClass.h"
+#include "frtosa.h"
 
 #define TASK_SYSTEM_EN      (1)
-#define TASK_CONSOLE_EN     (0)
+#define TASK_CONSOLE_EN     (1)
 #define TASK_DEVMANAGER_EN  (1)
 
 enum {
